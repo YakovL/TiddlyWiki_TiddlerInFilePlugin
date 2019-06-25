@@ -100,7 +100,7 @@ store.getLoader().internalizeTiddler(store, tiddler, tiddler.title, divRef);
 //		var tiddlerText = loadFile(getLocalPath(getFullPath(meta.fileName)));
 //		onExternalTiddlerLoad(tiddlerText !== null, meta, tiddlerText);
 		// so we use async instead:
-		let path = getFullPath(meta.fileName + '.' + this.getExtension(meta));
+		let path = getFullPath(meta.fileName, this.getExtension(meta));
 		httpReq("GET", path, this.onExternalTiddlerLoad, meta);
 		//# rename onExternalTiddlerLoad into internalizeAndRegister?
 	},
@@ -114,8 +114,7 @@ store.getLoader().internalizeTiddler(store, tiddler, tiddler.title, divRef);
 		//meta.lastLoaded = responseText;
 	},
 	saveExternal: function(meta, callback) {
-		const extension = '.' + this.getExtension(meta);
-		const fullPath = getFullPath(meta.fileName + extension);
+		const fullPath = getFullPath(meta.fileName, this.getExtension(meta));
 		// we don't try to save remote files (yet)
 		if(!isLocalAbsolutePath(fullPath)) {
 			//# if(callback) callback(.., '[saving remote is not supported]')
@@ -173,12 +172,16 @@ function isLocalAbsolutePath(path) {
 	//# rename? we're going to check whether an absolute path is local, not path is absolute local
 	return /^\w\:/.exec(path) || /^\//.exec(path) || /^file\:/.exec(path);
 }
-function getFullPath(subPath) {
+function getFullPath(subPath, extension) {
+	var fileNamePosition = subPath.lastIndexOf('/') + 1;
+	if(subPath.substr(fileNamePosition).indexOf('.') == -1)
+		subPath += '.' + extension;
+
 	if(isAbsolutePath(subPath))
 		return subPath;
-	var url = window.location.toString();
-	var base = url.substr(0, url.lastIndexOf('/') + 1);
-	//# if not absolute path
+
+	const url = window.location.toString();
+	const base = url.substr(0, url.lastIndexOf('/') + 1);
 	return base + subPath;
 }
 
