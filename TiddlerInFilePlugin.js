@@ -1,5 +1,5 @@
 /***
-|Version|1.0.1|
+|Version|1.1|
 ***/
 //{{{
 config.macros.external = {
@@ -11,19 +11,25 @@ config.macros.external = {
 			internalize: function(tiddler, source) {
 				tiddler.text = source;
 			}
-		}/*,
+		},
 		externalized: {
 			extension: 'tid.html',
 			externalize: function(tiddler) {
 				return store.getSaver().externalizeTiddler(store, tiddler);
 			},
+			// like for 'text', extends tiddler, doesn't create from scratch
 			internalize: function(tiddler, source) {
-				//# create hidden div from source
-store.getLoader().internalizeTiddler(store, tiddler, tiddler.title, divRef);
+				var div = createTiddlyElement(document.body, 'div');
+				div.setAttribute('style','display:none;');
+				div.innerHTML = externalizedText;
+				store.getLoader().internalizeTiddler(store, tiddler,
+					tiddler.title, div.firstChild);
+				div.remove();
 			}
-		},
+		}/*,
 		tid: { extension: 'tid' },
 		json: { extension: 'tid.json' }
+		externalizedWithFormatter? sane to implement?
 		*/
 	},
 	// here and below "meta" means "info about registered external tiddler,
