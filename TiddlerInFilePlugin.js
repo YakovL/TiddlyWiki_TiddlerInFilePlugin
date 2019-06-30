@@ -1,5 +1,42 @@
+
 /***
+|Description|Allows to store any number of tiddlers as external files and more|
 |Version|1.1|
+|Source|https://github.com/YakovL/TiddlyWiki_TiddlerInFilePlugin|
+|Author|Yakov Litvin|
+|License|MIT|
+!!!Usage
+Once the plugin is installed (copy - tag {{{systemConfig}}} - reload) storing tiddlers in files is done via 2 steps:
+# list (describe) those in [[ExternalTiddlersList]] by writing {{{<<external>>}}} macros there
+# if the file exists and the tiddler doesn't, reload TW (external tiddler will be loaded on startup);<br>if the tiddler exists and the file doesn't, just save your TW
+
+Here's how the macro is used:
+{{{
+<<external [[MyTestTiddler]]>>
+}}}
+will store the tiddler's text in {{{MyTestTiddler.txt}}} in the same folder as TW. There's a number of other options:
+{{{
+<<external [[tiddler name]]
+  [file:<relative path with or without filename and extension>]
+  [format:{externalized | text}]
+  [keepInternal:true]
+  [plugin:true]
+>>
+}}}
+Examples of the {{{file}}} param usage:
+* {{{<<external [[MyTestTiddler]] file:"other name">>}}} makes file name different from tiddler name
+* {{{<<external [[MyPlugin]] file:"MyPlugin.js" plugin:true>>}}} sets a custom file extension (see also the {{{plugin}}} option below)
+* {{{<<external [[MyLog]] file:"../logs/">>}}} will store the file in another folder (note that omitted filename after {{{/}}} means "use tiddler name as filename and default extension")
+* the plugin doesn't take care of forbidden characters yet ({{{*}}}, {{{?}}}, {{{"}}} etc), so be careful about those
+
+Supported formats are
+* {{{text}}} (default) – only tiddler text is stored in the file with {{{.txt}}} extension; and
+* {{{externalized}}} – whole tiddler is stored in the same format as in TW store, file has {{{.tid.html}}} extension and is displayed is monospace tiddler text when opened in browser
+Formats can be added by extending {{{config.macros.external.fileFormats}}}.
+
+The {{{keepInternal}}} option makes TW save the tiddler in both external file and TW itself. This, for instance, affects tiddlers stored in {{{text}}} format: without it, all fields like creator, modified etc are destroyed on reload (since are not saved), but with it they are preserved.
+
+The {{{plugin}}} option makes TW evaluate the tiddler like it does with plugins. Note that it doesn't handle plugin dependencies yet. Also, TIFP doesn't currently take care of installing only once, so use it with {{{keepInternal}}} ''only'' if you understand the outcome.
 ***/
 //{{{
 config.macros.external = {
