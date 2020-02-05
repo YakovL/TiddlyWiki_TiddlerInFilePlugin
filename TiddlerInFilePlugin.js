@@ -1,7 +1,7 @@
 
 /***
 |Description|Allows to store any number of tiddlers as external files and more|
-|Version|1.1|
+|Version|1.1.1|
 |Source|https://github.com/YakovL/TiddlyWiki_TiddlerInFilePlugin|
 |Author|Yakov Litvin|
 |License|MIT|
@@ -58,7 +58,7 @@ config.macros.external = {
 			internalize: function(tiddler, source) {
 				var div = createTiddlyElement(document.body, 'div');
 				div.setAttribute('style','display:none;');
-				div.innerHTML = externalizedText;
+				div.innerHTML = source;
 				store.getLoader().internalizeTiddler(store, tiddler,
 					tiddler.title, div.firstChild);
 				div.remove();
@@ -145,7 +145,7 @@ config.macros.external = {
 //		var tiddlerText = loadFile(getLocalPath(getFullPath(meta.fileName)));
 //		onExternalTiddlerLoad(tiddlerText !== null, meta, tiddlerText);
 		// so we use async instead:
-		let path = getFullPath(meta.fileName, meta.tiddlerName, this.getExtension(meta));
+		const path = getFullPath(meta.fileName, meta.tiddlerName, this.getExtension(meta));
 		httpReq("GET", path, this.onExternalTiddlerLoad, meta);
 		//# rename onExternalTiddlerLoad into internalizeAndRegister?
 	},
