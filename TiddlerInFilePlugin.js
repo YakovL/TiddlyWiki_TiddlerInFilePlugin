@@ -145,8 +145,24 @@ config.macros.external = {
 //		var tiddlerText = loadFile(getLocalPath(getFullPath(meta.fileName)));
 //		onExternalTiddlerLoad(tiddlerText !== null, meta, tiddlerText);
 		// so we use async instead:
+
+		const callback = this.onExternalTiddlerLoad
 		const path = getFullPath(meta.fileName, meta.tiddlerName, this.getExtension(meta));
-		httpReq("GET", path, this.onExternalTiddlerLoad, meta);
+		// httpReq("GET", path, callback, meta) uses default dataType,
+		// which causes js to get evaluated on load. To avoid this, we customize the ajax call:
+		jQuery.ajax({
+			type: "GET",
+			url: path,
+			dataType: "text",
+			processData: false,
+			cache: false,
+			complete: function(xhr, textStatus) {
+				if((!xhr.status && location.protocol === "file:") || (xhr.status >= 200 && xhr.status < 300) || xhr.status === 304)
+					callback(true, meta, xhr.responseText, path, xhr)
+				else
+					callback(false, meta, null, path, xhr)
+			}
+		})
 		//# rename onExternalTiddlerLoad into internalizeAndRegister?
 	},
 	onExternalTiddlerLoad: function(success, meta, responseText) {
