@@ -36,7 +36,7 @@ Formats can be added by extending {{{config.macros.external.fileFormats}}}.
 
 The {{{keepInternal}}} option makes TW save the tiddler in both external file and TW itself. This, for instance, affects tiddlers stored in {{{text}}} format: without it, all fields like creator, modified etc are destroyed on reload (since are not saved), but with it they are preserved.
 
-The {{{plugin}}} option makes TW evaluate the tiddler like it does with plugins. Note that it doesn't handle plugin dependencies yet. Also, TIFP doesn't currently take care of installing only once, so use it with {{{keepInternal}}} ''only'' if you understand the outcome.
+The {{{plugin}}} option makes TW evaluate the tiddler like it does with plugins. Note that it doesn't handle plugin dependencies yet. @@color:red;Warning@@: TIFP doesn't currently take care of installing only once, so use {{{plugin}}} with {{{keepInternal}}} ''only'' if you understand the outcome (for instance, some plugins may create infinite loops; also remember that internal version will be always installed first).
 ***/
 //{{{
 config.macros.external = {
