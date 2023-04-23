@@ -116,7 +116,8 @@ config.macros.external = {
 		//# check if contains "bad" characters (like " or * ..for local paths only)
 		meta.fileFormat = getParam(pParams, 'format', 'text');
 		meta.isPlugin = getFlag(pParams, 'plugin'); //# allow just "plugin" instead of "plugin:true"?
-		meta.keepInTW = getFlag(pParams, 'keepInternal'); //# ~
+		const keepInternal = getParam(pParams, 'keepInternal');
+		meta.keepInTW = !!keepInternal && keepInternal !== 'false'; //# ~
 		this.registerExternal(meta);
 
 		// visual feedback
