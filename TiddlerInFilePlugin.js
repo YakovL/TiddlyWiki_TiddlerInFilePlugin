@@ -171,8 +171,19 @@ config.macros.external = {
 		const tiddler = config.macros.external.internalizeTiddler(meta, responseText);
 		store.addTiddler(tiddler);
 		//# what if tiddler already exists?
-		if(meta.isPlugin)
+		if(meta.isPlugin) {
+			// make it look normally
+			tiddler.tags.push('systemConfig');
+			const author = store.getTiddlerText(tiddler.title + "::Author");
+			if(author) {
+				tiddler.creator = tiddler.creator || author;
+				tiddler.modifier = tiddler.modifier || tiddler.creator;
+			}
+
 			eval(tiddler.text);
+			// for plugins introducing macros, formatters etc (may be adjusted in the future)
+			story.refreshAllTiddlers();
+		}
 		//meta.lastLoaded = responseText;
 	},
 	saveExternal: function(meta, callback) {
