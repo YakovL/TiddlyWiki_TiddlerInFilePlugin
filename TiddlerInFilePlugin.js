@@ -2,7 +2,7 @@
 /***
 |Description|Allows to store any number of tiddlers as external files and more|
 |Version|1.1.1|
-|Source|https://github.com/YakovL/TiddlyWiki_TiddlerInFilePlugin|
+|Source|https://github.com/YakovL/TiddlyWiki_TiddlerInFilePlugin/blob/master/TiddlerInFilePlugin.js|
 |Author|Yakov Litvin|
 |License|MIT|
 !!!Usage
