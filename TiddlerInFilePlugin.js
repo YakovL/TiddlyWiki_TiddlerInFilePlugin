@@ -1,9 +1,9 @@
 /***
-|Description|Allows to store any number of tiddlers as external files and more|
-|Version|1.1.2|
-|Source|https://github.com/YakovL/TiddlyWiki_TiddlerInFilePlugin/blob/master/TiddlerInFilePlugin.js|
-|Author|Yakov Litvin|
-|License|MIT|
+|Description |Allows to store any number of tiddlers as external files and more|
+|Source      |https://github.com/YakovL/TiddlyWiki_TiddlerInFilePlugin/blob/master/TiddlerInFilePlugin.js|
+|Author      |Yakov Litvin|
+|Version     |1.1.2|
+|License     |[[MIT|https://github.com/YakovL/TiddlyWiki_YL_ExtensionsCollection/blob/master/Common%20License%20(MIT)]]|
 !!!Usage
 Once the plugin is installed (copy - tag {{{systemConfig}}} - reload) storing tiddlers in files is done via 2 steps:
 # list (describe) those in [[ExternalTiddlersList]] by writing {{{<<external>>}}} macros there
