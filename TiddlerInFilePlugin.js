@@ -173,7 +173,7 @@ config.macros.external = {
 		//# what if tiddler already exists?
 		if(meta.isPlugin) {
 			// make it look normally
-			tiddler.tags.push('systemConfig')
+			tiddler.tags.pushUnique('systemConfig')
 			const author = store.getTiddlerText(tiddler.title + "::Author")
 			if(author) {
 				tiddler.creator = tiddler.creator || author
