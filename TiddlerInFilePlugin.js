@@ -2,7 +2,7 @@
 |Description |Allows to store any number of tiddlers as external files and more|
 |Source      |https://github.com/YakovL/TiddlyWiki_TiddlerInFilePlugin/blob/master/TiddlerInFilePlugin.js|
 |Author      |Yakov Litvin|
-|Version     |1.1.2|
+|Version     |1.1.3|
 |License     |[[MIT|https://github.com/YakovL/TiddlyWiki_YL_ExtensionsCollection/blob/master/Common%20License%20(MIT)]]|
 !!!Usage
 Once the plugin is installed (copy - tag {{{systemConfig}}} - reload) storing tiddlers in files is done via 2 steps:
@@ -182,7 +182,7 @@ config.macros.external = {
 
 			eval(tiddler.text)
 			// for plugins introducing macros, formatters etc (may be adjusted in the future)
-			story.refreshAllTiddlers()
+			refreshAll()
 		}
 		//meta.lastLoaded = responseText
 	},
