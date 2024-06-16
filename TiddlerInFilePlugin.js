@@ -2,7 +2,7 @@
 |Description |Allows to store any number of tiddlers as external files and more|
 |Source      |https://github.com/YakovL/TiddlyWiki_TiddlerInFilePlugin/blob/master/TiddlerInFilePlugin.js|
 |Author      |Yakov Litvin|
-|Version     |1.1.3|
+|Version     |1.1.4|
 |License     |[[MIT|https://github.com/YakovL/TiddlyWiki_YL_ExtensionsCollection/blob/master/Common%20License%20(MIT)]]|
 !!!Usage
 Once the plugin is installed (copy - tag {{{systemConfig}}} - reload) storing tiddlers in files is done via 2 steps:
@@ -87,6 +87,8 @@ config.macros.external = {
 		const tiddler = store.fetchTiddler(meta.tiddlerName) ||
 			new Tiddler(meta.tiddlerName)
 		format.internalize(tiddler, source) //# pass meta to tiddler?
+		// a patch for Windows: don't get linebreaks duplicated
+		tiddler.text = tiddler.text.replace(/\r\n/g, '\n')
 		tiddler.doNotSave = function() { return !meta.keepInTW }
 		meta.tiddler = tiddler
 		
