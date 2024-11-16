@@ -8,6 +8,7 @@
 Once the plugin is installed (copy - tag {{{systemConfig}}} - reload) storing tiddlers in files is done via 2 steps:
 # list (describe) those in [[ExternalTiddlersList]] by writing {{{<<external>>}}} macros there
 # if the file exists and the tiddler doesn't, reload TW (external tiddler will be loaded on startup);<br>if the tiddler exists and the file doesn't, just save your TW
+Note: external tiddler is always the main "source of truth": if {{{keepInternal:true}}} is used, it is saved in TW as well, but loading external content will overwrite what is saved in TW.
 
 Here's how the macro is used:
 {{{
