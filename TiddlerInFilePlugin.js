@@ -4,6 +4,15 @@
 |Author      |Yakov Litvin|
 |Version     |1.1.4|
 |License     |[[MIT|https://github.com/YakovL/TiddlyWiki_YL_ExtensionsCollection/blob/master/Common%20License%20(MIT)]]|
+!!!Requirements
+Since the plugin loads and saves files, it needs that the browser and/or saver supports these operations. Here are some options:
+* Loading files:
+** Works when TW is opened (and external files are attempted to be loaded) via http (or https) protocol (but not, by default, via file:// url);
+** Firefox allows loading local files when the {{{security.fileuri.strict_origin_policy}}} setting is set to {{{false}}} (type {{{about:config}}} in address bar to open the configuration UI). This is only recommended to use this setup if Firefox is not your primary browser, i.e. you use it only for TW and some trusted sites. Not checked yet: maybe it's possible to change this setting in a separate Firefox profile (not globally).
+** Some savers may provide full file loading functionality. Those yet to be tested: [[TiddlyDesktop|https://github.com/Jermolene/TiddlyDesktop]], ..;
+* Saving files:
+** suitable savers include: [[Timimi|https://github.com/ibnishak/Timimi]]; the savers yet to be tested: [[TiddlyDesktop|https://github.com/Jermolene/TiddlyDesktop]], ..;
+
 !!!Usage
 Once the plugin is installed (copy, tag with {{{systemConfig}}}, reload) storing tiddlers in files is done via 2 steps:
 # list (describe) those in [[ExternalTiddlersList]] by writing {{{<<external>>}}} macros there
