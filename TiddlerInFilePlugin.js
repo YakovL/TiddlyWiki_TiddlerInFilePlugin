@@ -5,7 +5,7 @@
 |Version     |1.1.4|
 |License     |[[MIT|https://github.com/YakovL/TiddlyWiki_YL_ExtensionsCollection/blob/master/Common%20License%20(MIT)]]|
 !!!Usage
-Once the plugin is installed (copy - tag {{{systemConfig}}} - reload) storing tiddlers in files is done via 2 steps:
+Once the plugin is installed (copy, tag with {{{systemConfig}}}, reload) storing tiddlers in files is done via 2 steps:
 # list (describe) those in [[ExternalTiddlersList]] by writing {{{<<external>>}}} macros there
 # if the file exists and the tiddler doesn't, reload TW (external tiddler will be loaded on startup);<br>if the tiddler exists and the file doesn't, just save your TW
 Note: external tiddler is always the main "source of truth": if {{{keepInternal:true}}} is used, it is saved in TW as well, but loading external content will overwrite what is saved in TW.
@@ -56,7 +56,7 @@ config.macros.external = {
 			},
 			// like for 'text', extends tiddler, doesn't create from scratch
 			internalize: function(tiddler, source) {
-				var div = createTiddlyElement(document.body, 'div')
+				const div = createTiddlyElement(document.body, 'div')
 				div.setAttribute('style','display:none;')
 				div.innerHTML = source
 				store.getLoader().internalizeTiddler(store, tiddler,
@@ -138,7 +138,7 @@ config.macros.external = {
 		this.tiddlersMeta.push(meta)
 	},
 	getMetaFor: function(tiddlerOrTitle) {
-		var isTitle = typeof tiddlerOrTitle == "string"
+		const isTitle = typeof tiddlerOrTitle == "string"
 		for(meta of this.tiddlersMeta)
 			if(isTitle && meta.tiddlerName == tiddlerOrTitle ||
 			  !isTitle && meta.tiddler == tiddlerOrTitle)
@@ -146,7 +146,7 @@ config.macros.external = {
 	},
 	loadExternal: function(meta) {
 		// sync loading fails on startup because TF injects new mozillaLoadFile too late
-//		var tiddlerText = loadFile(getLocalPath(getFullPath(meta.fileName)));
+//		const tiddlerText = loadFile(getLocalPath(getFullPath(meta.fileName)));
 //		onExternalTiddlerLoad(tiddlerText !== null, meta, tiddlerText);
 		// so we use async instead:
 
@@ -276,7 +276,7 @@ if(!config.macros.external.orig_saveChanges) {
 if(!config.macros.external.orig_deleteTiddler) {
 	config.macros.external.orig_deleteTiddler = store.deleteTiddler
 	store.deleteTiddler = function(title) {
-		var registeredMeta = config.macros.external.getMetaFor(title)
+		const registeredMeta = config.macros.external.getMetaFor(title)
 		if(registeredMeta) registeredMeta.tiddler = null
 
 		return config.macros.external.orig_deleteTiddler.apply(this, arguments)
