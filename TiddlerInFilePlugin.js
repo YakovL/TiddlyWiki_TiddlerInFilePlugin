@@ -9,7 +9,7 @@ Since the plugin loads and saves files, it needs that the browser and/or saver s
 * Loading files:
 ** Works when TW is opened (and external files are attempted to be loaded) via http (or https) protocol (but not, by default, via file:// url);
 ** Firefox allows loading local files when the {{{security.fileuri.strict_origin_policy}}} setting is set to {{{false}}} (type {{{about:config}}} in address bar to open the configuration UI). If Firefox is your primary browser, i.e. you use it not just for TW and some trusted sites, it is recommended to [[create|https://groups.google.com/g/tiddlywikiclassic/c/T1q0q9uF2aI/m/f2SVb8CYAAAJ]] a separate profile for using ~TWs and change the setting there to ensure better security.
-** Some savers may provide full file loading functionality. Those yet to be tested: [[TiddlyDesktop|https://github.com/Jermolene/TiddlyDesktop]], ..;
+** Some savers may provide full file loading functionality. Those yet to be tested: [[TiddlyDesktop|https://github.com/Jermolene/TiddlyDesktop]], [[tiddly-node-saver|https://github.com/fallwest/tiddly-node-saver]], [[nwTWcSaver|https://github.com/nwOkido/nwTWcSaver]], ..;
 * Saving files:
 ** suitable savers include: [[Timimi|https://github.com/ibnishak/Timimi]]; the savers yet to be tested: [[TiddlyDesktop|https://github.com/Jermolene/TiddlyDesktop]], ..;
 
